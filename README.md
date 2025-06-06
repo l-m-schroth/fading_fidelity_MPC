@@ -4,7 +4,7 @@ _Exploiting Sensitivity Decay for Computational Efficiency_
 This repository contains code, data and experiments accompanying my master thesis.  
 See the **`notebooks/`** folder to reproduce figures and interact with several examples of slow-fast systems.
 
-## Setup (adjust as needed)
+## Setup 
 
 ### 0. Prerequisites – Git LFS (needed to pull the data files)
 
@@ -49,6 +49,4 @@ python setup.py install
 ### 5. acados
 
 Our code makes use of **acados**. If you already have an existing acados installation on your device, try running it.  
-We encountered small issues with different multi-phase solver libraries wrongfully influencing each other. If that happens, install acados from our fork—these issues were addressed there:
-
-<https://github.com/l-m-schroth/acados>
+We encountered small issues with different multi-phase solver libraries wrongfully influencing each other. If that happens, install acados from our fork—these issues were addressed there: <https://github.com/l-m-schroth/acados>
