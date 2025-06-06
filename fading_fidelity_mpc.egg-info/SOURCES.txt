@@ -1,0 +1,5 @@
+setup.py
+fading_fidelity_mpc.egg-info/PKG-INFO
+fading_fidelity_mpc.egg-info/SOURCES.txt
+fading_fidelity_mpc.egg-info/dependency_links.txt
+fading_fidelity_mpc.egg-info/top_level.txt

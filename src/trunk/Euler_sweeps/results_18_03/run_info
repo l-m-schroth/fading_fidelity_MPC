@@ -1,0 +1,7 @@
+Note: Despite the files beeing called eppises, it is a half-space constrained run!
+
+System: 16-link chain
+Task: Trajectory tracking, half-space cosntraint at x = 0.2
+Frequency of trajectory: 1.0
+Weights are consistent.
+No noise.

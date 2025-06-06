@@ -1,0 +1,71 @@
+<mujoco model="cable_trunk_model_example">
+  <compiler angle="radian"/>
+
+  <extension>
+    <plugin plugin="mujoco.elasticity.cable"/>
+  </extension>
+
+  <custom>
+    <text name="composite_actuated" data="rope_actuated"/>
+  </custom>
+
+  <asset>
+    <texture type="2d" name="grid" builtin="checker" rgb1="0.1 0.2 0.3" rgb2="0.2 0.3 0.4" width="300" height="300"/>
+    <material name="grid" texture="grid" texrepeat="8 8" reflectance="0.2"/>
+  </asset>
+
+  <worldbody>
+    <geom size="10 10 0.01" type="plane" material="grid"/>
+    <light pos="0 0 2" dir="0 0 -1"/>
+    <site name="world_left" pos="-0.005 0 0.7"/> 
+    <body name="actuatedB_first" pos="0 0 0.7" quat="0 -0.707107 0 0.707107">
+      <joint name="actuatedJ_0" pos="0 0 0" type="hinge" axis="0 1 0" group="3" stiffness="0.65" actuatorfrclimited="false" damping="0.032"/>
+      <geom name="actuatedG0" size="0.005 0.125" pos="0.125 0 0" quat="0.707107 0 -0.707107 0" type="capsule" rgba="0.8 0.2 0.1 1"/>
+      <site name="actuatedS_first" pos="0 0 0" group="3"/>
+      <site name="actuatedB_0_left" pos="0.25 0 0.005"/> 
+      <!-- <site name="actuatedB_0_right" pos="0.25 0 -0.005"/> -->
+      <body name="actuatedB_1" pos="0.25 0 0">
+        <joint name="actuatedJ_1" pos="0 0 0" type="hinge" axis="0 1 0" group="3" stiffness="0.65" actuatorfrclimited="false" damping="0.032"/>
+        <geom name="actuatedG1" size="0.005 0.125" pos="0.125 0 0" quat="0.707107 0 -0.707107 0" type="capsule" rgba="0.8 0.2 0.1 1"/>
+        <site name="actuatedB_1_left" pos="0.25 0 0.005"/> 
+        <!-- <site name="actuatedB_1_right" pos="0.25 0 -0.005"/>  -->
+        <site name="endeffector" pos="0.25 0 0"/> 
+      </body>
+    </body>
+  </worldbody>
+
+  <!-- tendon attached at tfirst link-->
+  <tendon>
+    <spatial name="chain_tendon_left_middle" stiffness="0" damping="0" width="0.001">
+      <site site="world_left"/>
+      <site site="actuatedB_0_left"/>
+    </spatial>
+  </tendon>
+
+  <!-- tendon attached up tp the bottom -->
+  <tendon>
+    <spatial name="chain_tendon_left_bottom" stiffness="0" damping="0" width="0.001">
+      <site site="world_left"/>
+      <site site="actuatedB_0_left"/>
+      <site site="actuatedB_1_left"/>
+    </spatial>
+  </tendon>
+
+  <!-- <tendon>
+    <spatial name="chain_tendon_right" stiffness="0" damping="0" width="0.002">
+      <site site="actuatedB_0_right"/>
+      <site site="actuatedB_1_right"/>
+    </spatial>
+  </tendon> -->
+
+  <actuator>
+    <general tendon="chain_tendon_left_middle" gear="1000" /> 
+    <general tendon="chain_tendon_left_bottom" gear="1000" /> 
+    <!-- <general tendon="chain_tendon_right" gear="10" /> -->
+  </actuator>
+
+  <contact>
+    <exclude body1="actuatedB_first" body2="actuatedB_1"/>
+  </contact>
+
+</mujoco>
